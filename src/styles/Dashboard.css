@@ -1,0 +1,8 @@
+.dashboardContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.sideBar{
+    position: fixed;
+}

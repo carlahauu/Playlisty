@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
@@ -8,8 +9,8 @@ function App() {
         <div className="appContent">
           <Routes>
             <Route path="/" />
+            <Route path="/dashboard" element={<Dashboard />}/>
           </Routes>
-          <Footer />
         </div>
       </div>
     </>
