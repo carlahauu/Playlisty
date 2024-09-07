@@ -1,8 +1,16 @@
 .App{
   display: flex;
-  flex-direction: column;
 }
 
 a{
   color: white;
+}
+
+.appSidebar{
+  position: fixed;
+}
+
+.appContent{
+  margin-top: 50px;
+  width: 90%;
 }

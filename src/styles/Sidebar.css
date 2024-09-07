@@ -1,60 +1,59 @@
-.playlistyLogo img{
-    width: 160px; 
-    height: 110px;
+.playlistyLogo img {
+  width: 160px;
+  height: 110px;
 }
 
 .playlistyLogo p {
-    color: #1CD760;
-    font-weight: 700;
-    font-size: 35px;
+  color: #1cd760;
+  font-weight: 700;
+  font-size: 35px;
 }
 
-.playlistyLogo{
-    display: flex;
-    width: 100%;
-    margin-left: -15px;
+.playlistyLogo {
+  display: flex;
+  width: 100%;
+  margin-left: -15px;
 }
 
-.sidebarContainer{
-    border-style: solid;
-    border-left-width: 0px;
-    border-top-width: 0px;
-    border-bottom-width: 0px;
-    border-right-color: rgb(187, 187, 187);
-    padding-left: 45px;
-    padding-right: 45px;
-    padding-top: 20px;
-    min-height: 100vh;
-    max-height: 100%;
+.sidebarContainer {
+  border-style: solid;
+  border-left-width: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+  border-right-color: rgb(187, 187, 187);
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-top: 20px;
+  min-height: 100vh;
+  max-height: 100%;
 }
 
-.sidebarItems a{
-    display: flex;
-    flex-direction: row;
-    background-color: #2f2f2f;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 700;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: #29292900;
-    margin-bottom: 15px;
+.sidebarItems a {
+  display: flex;
+  flex-direction: row;
+  background-color: #2f2f2f;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: #29292900;
+  margin-bottom: 15px;
 }
 
-.sidebarItems a:hover{
-    border-style: solid;
-    background-color: #414141;
+.sidebarItems a:hover {
+  border-style: solid;
+  background-color: #414141;
 }
 
-.sparkles{
-    margin-left: 25px;
+.sparkles {
+  margin-left: 25px;
 }
 
-.sidebarItems p{
-    margin-top: 0px;
-    margin-left: 20px;
-    margin-bottom: 0px;
+.sidebarItems p {
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-bottom: 0px;
 }
-
