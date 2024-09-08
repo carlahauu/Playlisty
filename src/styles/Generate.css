@@ -143,6 +143,39 @@
   cursor: pointer;
 }
 
+.songResult{
+  background-color: #1E1E1E;
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+}
+
+.songResult img{
+  width: 50px;
+}
+
+.songResult p{
+  margin-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.songArtist {
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.songName{
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.songResult:hover{
+  background-color: #242424;
+  cursor: pointer;
+}
+
 .results{
   justify-content: space-evenly;
   height: 50vh;
@@ -250,6 +283,10 @@
 
 .deleteArtistPreference:hover{
   cursor: pointer;
+}
+
+.songDetails p{
+  margin-top: 2px;
 }
 
 @media only screen and (max-width: 600px) {

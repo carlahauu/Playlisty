@@ -58,3 +58,33 @@
   margin-left: 20px;
   margin-bottom: 0px;
 }
+
+.userData{
+  display: flex;
+  flex-direction: row;
+  background-color: #2f2f2f;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.userData p{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.userData img{
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+.userName p{
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.userName a{
+  color: rgb(253, 67, 67);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}

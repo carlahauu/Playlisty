@@ -11,11 +11,18 @@ import { Close } from "@mui/icons-material";
 export default function Generate() {
   const [preferences, setPreferences] = useState("");
   const [vibe, setVibe] = useState("");
+
   const [artistSearchBox, setArtistSearchBox] = useState(false);
+  const [songSearchBox, setSongSearchBox] = useState(false);
+
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
+
   const [artists, setArtists] = useState([]);
+  const [songs, setSongs] = useState([]);
   const [artistNames, setArtistNames] = useState([]);
+  const [songNames, setSongNames] = useState([]);
+
   const [error, setError] = useState(false);
 
   const searchArtists = async (e) => {
@@ -38,21 +45,50 @@ export default function Generate() {
     }
   };
 
+  const searchSongs = async (e) => {
+    let token = window.localStorage.getItem("token");
+    e.preventDefault();
+    try {
+      const { data } = await axios.get("https://api.spotify.com/v1/search", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          q: searchKey,
+          type: "track",
+        },
+      });
+      setSongs(data.tracks.items);
+    } catch (error) {
+      console.log(error.message);
+      setError(true);
+    }
+  };
+
+  const appendSongs = (songName, songArtist, songImg) => {
+    setArtistSearchBox(false);
+    setArtistNames((prevArtistNames) => [
+      { name: artistName, image: artistImg },
+      ...prevArtistNames,
+    ]);
+  };
+
   const appendArtists = (artistName, artistImg) => {
     setArtistSearchBox(false);
-    setArtistNames(prevArtistNames => [
-      { name: artistName, image: artistImg }, ...prevArtistNames
+    setArtistNames((prevArtistNames) => [
+      { name: artistName, image: artistImg },
+      ...prevArtistNames,
     ]);
   };
 
   const deleteArtist = (nameToDelete, imageToDelete) => {
-    setArtistNames(prevArtistNames => 
+    setArtistNames((prevArtistNames) =>
       prevArtistNames.filter(
-        artistName => artistName.name !== nameToDelete || artistName.image !== imageToDelete
+        (artistName) =>
+          artistName.name !== nameToDelete || artistName.image !== imageToDelete
       )
     );
   };
-  
 
   const geminiKey = import.meta.env.VITE_GEMINI_KEY;
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
@@ -99,13 +135,48 @@ export default function Generate() {
             </form>
             <div className="results">
               {artists.map((artist) => (
-                <div onClick={() => appendArtists(artist.name, artist.images[0].url)} className="result" key={artist.id}>
+                <div
+                  onClick={() =>
+                    appendArtists(artist.name, artist.images[0].url)
+                  }
+                  className="result"
+                  key={artist.id}
+                >
                   {artist.images.length ? (
                     <img src={artist.images[0].url} alt="" />
                   ) : (
                     <div>No Image</div>
                   )}
                   <p>{artist.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {songSearchBox ? (
+        <div className="artistSearchContainer">
+          <div className="artistSearchBox">
+            <form onSubmit={searchSongs}>
+              <input
+                type="text"
+                onChange={(e) => setSearchKey(e.target.value)}
+              />
+              <button type={"submit"}>Search</button>
+              <div onClick={() => setSongSearchBox(false)} className="closeBtn">
+                <Close fontSize="small" />
+              </div>
+            </form>
+            <div className="results">
+              {songs.map((song) => (
+                <div className="songResult" key={song.id}>
+                  <img src={song.album.images[0].url} />
+                  <div className="songDetails">
+                    <p className="songName">{song.name}</p>
+                    <p className="songArtist">{song.album.artists[0].name}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -129,7 +200,7 @@ export default function Generate() {
             placeholder="What’s Your Vibe Today? What’s the occasion?"
           ></textarea>
           <div className="preferences">
-            <a>
+            <a onClick={() => setSongSearchBox(true)}>
               <p>Add Specific Songs</p>
               <AddBoxOutlinedIcon className="addSign" fontSize="medium" />
             </a>
@@ -145,11 +216,18 @@ export default function Generate() {
           <div className="preferredArtists">
             {artistNames.map((artistName, key) => (
               <>
-              <div key={key} className="preferredArtist">
-                <img src={artistName.image} />
-                <p>{artistName.name}</p>
-                <div onClick={() => deleteArtist(artistName.name, artistName.image)} className="deleteArtistPreference"><Close /></div>
-              </div>
+                <div key={key} className="preferredArtist">
+                  <img src={artistName.image} />
+                  <p>{artistName.name}</p>
+                  <div
+                    onClick={() =>
+                      deleteArtist(artistName.name, artistName.image)
+                    }
+                    className="deleteArtistPreference"
+                  >
+                    <Close />
+                  </div>
+                </div>
               </>
             ))}
           </div>
