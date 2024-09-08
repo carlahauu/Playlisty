@@ -15,6 +15,7 @@ export default function Generate() {
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
   const [artists, setArtists] = useState([]);
+  const [artistNames, setArtistNames] = useState([]);
   const [error, setError] = useState(false);
 
   const searchArtists = async (e) => {
@@ -36,6 +37,22 @@ export default function Generate() {
       setError(true);
     }
   };
+
+  const appendArtists = (artistName, artistImg) => {
+    setArtistSearchBox(false);
+    setArtistNames(prevArtistNames => [
+      { name: artistName, image: artistImg }, ...prevArtistNames
+    ]);
+  };
+
+  const deleteArtist = (nameToDelete, imageToDelete) => {
+    setArtistNames(prevArtistNames => 
+      prevArtistNames.filter(
+        artistName => artistName.name !== nameToDelete || artistName.image !== imageToDelete
+      )
+    );
+  };
+  
 
   const geminiKey = import.meta.env.VITE_GEMINI_KEY;
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
@@ -73,15 +90,18 @@ export default function Generate() {
                 onChange={(e) => setSearchKey(e.target.value)}
               />
               <button type={"submit"}>Search</button>
-              <div onClick={() => setArtistSearchBox(false)} className="closeBtn">
+              <div
+                onClick={() => setArtistSearchBox(false)}
+                className="closeBtn"
+              >
                 <Close fontSize="small" />
               </div>
             </form>
             <div className="results">
               {artists.map((artist) => (
-                <div className="result" key={artist.id}>
+                <div onClick={() => appendArtists(artist.name, artist.images[0].url)} className="result" key={artist.id}>
                   {artist.images.length ? (
-                    <img width={"100px"} src={artist.images[0].url} alt="" />
+                    <img src={artist.images[0].url} alt="" />
                   ) : (
                     <div>No Image</div>
                   )}
@@ -121,6 +141,17 @@ export default function Generate() {
               style={{ fontSize: "20px" }}
               placeholder="Specify genres or other preferences.."
             ></textarea>
+          </div>
+          <div className="preferredArtists">
+            {artistNames.map((artistName, key) => (
+              <>
+              <div key={key} className="preferredArtist">
+                <img src={artistName.image} />
+                <p>{artistName.name}</p>
+                <div onClick={() => deleteArtist(artistName.name, artistName.image)} className="deleteArtistPreference"><Close /></div>
+              </div>
+              </>
+            ))}
           </div>
           <input
             className="generateButton"

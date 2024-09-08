@@ -209,6 +209,49 @@
   height: fit-content;
 }
 
+.preferredArtists{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  overflow: auto;
+  margin-top: 15px;
+  max-width: 65vw;
+}
+
+.preferredArtist img{
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.preferredArtist p{
+  font-weight: 500;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.preferredArtist{
+  background-color: #1f1f1f;
+  display: flex;
+  margin-right: 10px;
+  place-items: center;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 20px;
+}
+
+.deleteArtistPreference{
+  margin-top: 2px;
+}
+
+.deleteArtistPreference:hover{
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
   .generateContainer {
     margin-left: 0px;
