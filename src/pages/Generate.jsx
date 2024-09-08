@@ -66,10 +66,10 @@ export default function Generate() {
   };
 
   const appendSongs = (songName, songArtist, songImg) => {
-    setArtistSearchBox(false);
-    setArtistNames((prevArtistNames) => [
-      { name: artistName, image: artistImg },
-      ...prevArtistNames,
+    setSongSearchBox(false);
+    setSongNames((prevSongNames) => [
+      { name: songName, artist: songArtist, image: songImg },
+      ...prevSongNames,
     ]);
   };
 
@@ -171,7 +171,17 @@ export default function Generate() {
             </form>
             <div className="results">
               {songs.map((song) => (
-                <div className="songResult" key={song.id}>
+                <div
+                  onClick={() =>
+                    appendSongs(
+                      song.name,
+                      song.album.artists[0].name, 
+                      song.album.images[0].url
+                    )
+                  }
+                  className="songResult"
+                  key={song.id}
+                >
                   <img src={song.album.images[0].url} />
                   <div className="songDetails">
                     <p className="songName">{song.name}</p>
@@ -212,6 +222,22 @@ export default function Generate() {
               style={{ fontSize: "20px" }}
               placeholder="Specify genres or other preferences.."
             ></textarea>
+          </div>
+          <div className="preferredArtists">
+            {songNames.map((songName, key) => (
+              <>
+                <div key={key} className="preferredSong">
+                  <img src={songName.image} />
+                  <div className="preferredSongDetails">
+                    <p className="preferredSongName">{songName.name}</p>
+                    <p className="preferredSongArtist">{songName.artist}</p>
+                  </div>
+                  <div className="deleteArtistPreference">
+                    <Close />
+                  </div>
+                </div>
+              </>
+            ))}
           </div>
           <div className="preferredArtists">
             {artistNames.map((artistName, key) => (
