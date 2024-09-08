@@ -5,12 +5,3 @@
 a{
   color: white;
 }
-
-.appSidebar{
-  position: fixed;
-}
-
-.appContent{
-  margin-top: 50px;
-  width: 90%;
-}

@@ -26,6 +26,7 @@
   padding-top: 20px;
   min-height: 100vh;
   max-height: 100%;
+  background-color: #181818;
 }
 
 .sidebarItems a {

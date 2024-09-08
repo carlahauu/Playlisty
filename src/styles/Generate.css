@@ -53,13 +53,18 @@
   padding-right: 20px;
 }
 
+.preferences a:hover {
+  background-color: #121212;
+  cursor: pointer;
+}
+
 .preferences p {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
 }
 
 .addSign {
-  margin-top: 14px;
+  margin-top: 18px;
   margin-left: 10px;
 }
 
@@ -71,7 +76,7 @@
 
 .preferences textarea {
   background-color: #1f1f1f;
-  width: 64.5%;
+  width: 35.5%;
   margin-top: 0px;
 }
 
@@ -86,4 +91,126 @@
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 15px;
+}
+
+.generateButton:hover{
+  background-color: #2aff78;
+  cursor: pointer;
+}
+
+.artistSearchBox{
+  background-color: #2f2f2f;
+  padding: 20px;
+  border-radius: 20px;
+  position: fixed;
+  width: 50vw;
+  max-height: 70vh;
+}
+
+.artistSearchContainer{
+  background-color: #181818ab;
+  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 80vh;
+  position: fixed;
+}
+
+.result{
+  background-color: #1E1E1E;
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+}
+
+.result img{
+  width: 50px;
+}
+
+.result p{
+  font-weight: 700;
+  margin-left: 20px;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.result:hover{
+  background-color: #242424;
+  cursor: pointer;
+}
+
+.results{
+  justify-content: space-evenly;
+  height: 50vh;
+  overflow: scroll;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.error{
+  background-color: rgb(218, 60, 60);
+  font-weight: 700;
+  font-size: 20px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.error p{
+  margin: 0;
+}
+
+.artistSearchBox form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.artistSearchBox input{
+  font-size: 20px;
+  border-style: none;
+  border-radius: 20px;
+  padding: 15px;
+  width: 70%;
+}
+
+.artistSearchBox button{
+  background-color: #1cd760;
+  color: #121212;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 15px;
+  border-style: none;
+  border-radius: 20px;
+  width: 15%;
+}
+
+.artistSearchBox button:hover{
+  cursor: pointer;
+}
+
+.closeBtn:hover{
+  cursor: pointer;
+}
+
+.closeBtn{
+  background-color: #1E1E1E;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+  height: fit-content;
+}
+
+@media only screen and (max-width: 600px) {
+  .generateContainer {
+    margin-left: 0px;
+  }
 }

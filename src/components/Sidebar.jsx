@@ -1,9 +1,9 @@
 import React from 'react'
 import "../styles/Sidebar.css"
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import EmailIcon from '@mui/icons-material/Email';
 import FeedIcon from '@mui/icons-material/Feed';
+import { QueueMusic } from '@mui/icons-material';
 
 export default function Sidebar() {
   return (
@@ -18,7 +18,7 @@ export default function Sidebar() {
                 <p>Generate Playlist</p>
             </a>
             <a className='sidebarGenerate' href=''>
-                <div className="sparkles"><MusicNoteIcon /></div>
+                <div className="sparkles"><QueueMusic /></div>
                 <p>My Playlists</p>
             </a>
             <a className='sidebarGenerate' href=''>
