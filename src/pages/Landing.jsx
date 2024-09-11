@@ -9,6 +9,11 @@ export default function Landing() {
   const REDIRECT_URI = "http://localhost:5173/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
+  const SCOPE = [
+    'playlist-modify-public',
+    'playlist-modify-private',
+    'user-library-read'
+  ].join(' ');
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -38,6 +43,7 @@ export default function Landing() {
         REDIRECT_URI={REDIRECT_URI}
         RESPONSE_TYPE={RESPONSE_TYPE}
         AUTH_ENDPOINT={AUTH_ENDPOINT}
+        SCOPE={SCOPE}
         token={token}
         logout={logout}
       />

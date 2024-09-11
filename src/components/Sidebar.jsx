@@ -4,12 +4,14 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import EmailIcon from "@mui/icons-material/Email";
 import FeedIcon from "@mui/icons-material/Feed";
 import { useState, useEffect } from "react";
-import { QueueMusic } from "@mui/icons-material";
+import { QueueMusic, SettingsSuggestTwoTone } from "@mui/icons-material";
 import axios from "axios";
 
 export default function Sidebar() {
   const [profile, setProfile] = useState(null);
+  const [userId, setUserId] = useState("");
   const [error, setError] = useState(null);
+  
   let token = window.localStorage.getItem("token");
   async function fetchProfile(token) {
     const result = await fetch("https://api.spotify.com/v1/me", {
@@ -23,6 +25,11 @@ export default function Sidebar() {
     const getProfile = async () => {
       try {
         const userProfile = await fetchProfile(token);
+
+        const userID = userProfile.id;
+        let userId = window.localStorage.setItem("userId", userID);
+
+        setUserId(userId);
         setProfile(userProfile);
       } catch (err) {
         setError(err.message);

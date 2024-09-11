@@ -184,6 +184,22 @@
   margin-top: 20px;
 }
 
+.loadingMsg{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #1f1f1f;
+  padding-top: 10px;
+  border-radius: 20px;
+}
+
+.loadingMsg p{
+  margin-top: 5px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
 .error {
   background-color: rgb(218, 60, 60);
   font-weight: 700;

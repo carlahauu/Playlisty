@@ -46,7 +46,7 @@ function Navbar(props) {
               <a
                 href={`${props.AUTH_ENDPOINT}?client_id=${
                   import.meta.env.VITE_SPOTIFY_ID
-                }&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}`}
+                }&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=${props.SCOPE}`}
                 className="logInBtn"
               >
                 Log In
@@ -54,7 +54,7 @@ function Navbar(props) {
               <a
                 href={`${props.AUTH_ENDPOINT}?client_id=${
                   import.meta.env.VITE_SPOTIFY_ID
-                }&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}`}
+                }&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=${props.SCOPE}`}
                 className="signUpBtn"
               >
                 Sign Up
