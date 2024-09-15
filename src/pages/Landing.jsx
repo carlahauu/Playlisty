@@ -10,10 +10,22 @@ export default function Landing() {
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
   const SCOPE = [
-    'playlist-modify-public',
-    'playlist-modify-private',
-    'user-library-read'
-  ].join(' ');
+    "playlist-modify-public",
+    "playlist-modify-private",
+    "user-library-read",
+  ].join(" ");
+  const clientId = import.meta.env.VITE_SPOTIFY_ID;
+  const redirectUri = "http://localhost:5173/";
+
+  const scope = [
+    "playlist-modify-public",
+    "playlist-modify-private",
+    "user-library-read",
+  ].join(" ");
+
+  const authorizeUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}`;
+
+  window.localStorage.setItem("authorizeUrl", authorizeUrl);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -40,10 +52,6 @@ export default function Landing() {
   return (
     <div className="landingContainer">
       <Navbar
-        REDIRECT_URI={REDIRECT_URI}
-        RESPONSE_TYPE={RESPONSE_TYPE}
-        AUTH_ENDPOINT={AUTH_ENDPOINT}
-        SCOPE={SCOPE}
         token={token}
         logout={logout}
       />
@@ -60,12 +68,7 @@ export default function Landing() {
               through seamless Spotify integration. It's your music, your way.
             </p>
             {!token ? (
-              <a
-                href={`${AUTH_ENDPOINT}?client_id=${
-                  import.meta.env.VITE_SPOTIFY_ID
-                }&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-                className="heroBtn"
-              >
+              <a href={authorizeUrl} className="heroBtn">
                 <QueueMusic fontSize="large" className="musicIcon" />
                 <p>Generate Now!</p>
               </a>

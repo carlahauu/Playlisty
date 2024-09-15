@@ -17,6 +17,9 @@ function Navbar(props) {
       setStyle("visible");
     }
   };
+
+  let authUrl = window.localStorage.getItem("authorizeUrl");
+  
   return (
     <>
       <nav className="navbarContainer">
@@ -44,17 +47,13 @@ function Navbar(props) {
           {!props.token ? (
             <div className="loginBtns">
               <a
-                href={`${props.AUTH_ENDPOINT}?client_id=${
-                  import.meta.env.VITE_SPOTIFY_ID
-                }&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=${props.SCOPE}`}
+                href={authUrl}
                 className="logInBtn"
               >
                 Log In
               </a>
               <a
-                href={`${props.AUTH_ENDPOINT}?client_id=${
-                  import.meta.env.VITE_SPOTIFY_ID
-                }&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=${props.SCOPE}`}
+                href={authUrl}
                 className="signUpBtn"
               >
                 Sign Up
