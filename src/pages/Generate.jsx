@@ -82,6 +82,22 @@ export default function Generate() {
     return createdPlaylist;
   }
 
+  async function getPlaylist() {
+    let playlistId = window.localStorage.getItem("playlistId");
+    const spotifyApi = new SpotifyWebApi();
+    spotifyApi.setAccessToken(token); 
+
+    spotifyApi
+      .getPlaylist(playlistId)
+      .then((data) => {
+        const playlist = data.body;
+        console.log(playlist);
+      })
+      .catch((error) => {
+        console.error("Error fetching playlist:", error);
+      });
+  }
+
   const searchArtists = async (e) => {
     let token = window.localStorage.getItem("token");
     e.preventDefault();
@@ -182,7 +198,7 @@ export default function Generate() {
 
   The playlist should align with the overall mood and preferences, and it must contain at least 20 songs in total.
   
-  Please return the playlist as a JSON object called 'playlist'. Each entry should contain both the song name and the artist name. Make sure to include all specified songs and artists, and ensure their presence dominates the playlist.
+  Please return the playlist as a JSON object called 'playlist'. Each entry should contain "song" and "artist." Make sure it is "song" and "artist" and not any variation like "songName" and "artistName." Make sure to include all specified songs and artists, and ensure their presence dominates the playlist.
   Please don't include the backticks and json text in the beginning, and the 3 backticks in the end.
   `;
 
@@ -193,8 +209,9 @@ export default function Generate() {
       const text = await response.text();
 
       setLoading(true);
+      console.log(text)
 
-      if (!response.text) {
+      if (text == " " || "") {
         console.warn("Blank response received from Gemini AI.");
         setError(true);
         setErrorMsg(
@@ -204,6 +221,7 @@ export default function Generate() {
       }
 
       try {
+        console.log("trying")
         const parsed = JSON.parse(text);
         setGeneratedSongs(parsed.playlist);
         searchTracks(parsed.playlist);
