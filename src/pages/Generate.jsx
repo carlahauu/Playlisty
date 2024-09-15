@@ -13,7 +13,7 @@ import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 export default function Generate() {
   const [preferences, setPreferences] = useState("");
   const [vibe, setVibe] = useState("");
-  const trackUri = []
+  const trackUri = [];
 
   const [generatedSongs, setGeneratedSongs] = useState([]);
   const [generated, setGenerated] = useState(false);
@@ -29,25 +29,28 @@ export default function Generate() {
   const [songNames, setSongNames] = useState([]);
 
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function searchTracks(songs) {
     let token = window.localStorage.getItem("token");
     const spotifyApi = new SpotifyWebApi();
-  
+
     spotifyApi.setAccessToken(token);
-  
+
     for (const song of songs) {
-      const searchResult = await spotifyApi.searchTracks(`${song.song} by ${song.artist}`);
-  
+      const searchResult = await spotifyApi.searchTracks(
+        `${song.song} by ${song.artist}`
+      );
+
       if (searchResult.tracks.items.length > 0) {
         trackUri.push(searchResult.tracks.items[0].uri);
-        console.log(trackUri)
+        console.log(trackUri);
       } else {
         console.log(`Unable to find track: ${song.name}`);
       }
     }
-    createPlaylist(trackUri, vibe)
+    createPlaylist(trackUri, vibe);
     return trackUri;
   }
 
@@ -56,23 +59,26 @@ export default function Generate() {
     const user = await spotifyApi.getMe();
     const userId = user.id;
     let token = window.localStorage.getItem("token");
-  
-    // Assuming you have a valid Spotify access token
+
     spotifyApi.setAccessToken(token);
-  
+
     const playlistData = {
       name: playlistName,
       public: true,
     };
 
-    const playlistUris = {
-      "uris": trackUris
-    }
-  
-    const createdPlaylist = await spotifyApi.createPlaylist(userId, playlistData);
-  
+    const createdPlaylist = await spotifyApi.createPlaylist(
+      userId,
+      playlistData
+    );
+
     await spotifyApi.addTracksToPlaylist(createdPlaylist.id, trackUris);
-  
+
+    let playlistId = window.localStorage.setItem(
+      "playlistId",
+      createdPlaylist.id
+    );
+
     return createdPlaylist;
   }
 
@@ -110,7 +116,7 @@ export default function Generate() {
         },
       });
       setSongs(data.tracks.items);
-      console.log(songs)
+      console.log(songs);
     } catch (error) {
       console.log(error.message);
       setError(true);
@@ -186,18 +192,33 @@ export default function Generate() {
 
       const text = await response.text();
 
-      const parsed = JSON.parse(text);
-
-      setGeneratedSongs(parsed.playlist);
       setLoading(true);
-      console.log("Songs: ", parsed.playlist);
+
+      if (!response.text) {
+        console.warn("Blank response received from Gemini AI.");
+        setError(true);
+        setErrorMsg(
+          "Oops, something went wrong! Please click 'Generate Now' again."
+        );
+        setGeneratedSongs([]);
+      }
+
+      try {
+        const parsed = JSON.parse(text);
+        setGeneratedSongs(parsed.playlist);
+        searchTracks(parsed.playlist);
+      } catch (error) {
+        setError(true);
+        setErrorMsg(
+          "Oops, something went wrong! Please click 'Generate Now' again."
+        );
+      }
+
       if (loading == false) {
         setGenerated(true);
       } else {
         setGenerated(false);
       }
-      searchTracks(parsed.playlist)
-
     } catch (error) {
       console.log(generatedSongs);
       console.error("Error generating playlist:", error);
