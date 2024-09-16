@@ -31,8 +31,15 @@ export default function Generate() {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState(false)
+
+  const [playlistLink, setPlaylistLink] = useState("")
+  const [playlistImage, setPlaylistImage] = useState("")
+  const [playlistSongs, setPlaylistSongs] = useState([])
+  const [playlistArtists, setPlaylistArtists] = useState("")
 
   async function searchTracks(songs) {
+    setLoading(false);
     let token = window.localStorage.getItem("token");
     const spotifyApi = new SpotifyWebApi();
 
@@ -45,7 +52,6 @@ export default function Generate() {
 
       if (searchResult.tracks.items.length > 0) {
         trackUri.push(searchResult.tracks.items[0].uri);
-        console.log(trackUri);
       } else {
         console.log(`Unable to find track: ${song.name}`);
       }
@@ -55,6 +61,7 @@ export default function Generate() {
   }
 
   async function createPlaylist(trackUris, playlistName) {
+    setLoading(false)
     const spotifyApi = new SpotifyWebApi();
     const user = await spotifyApi.getMe();
     const userId = user.id;
@@ -79,10 +86,13 @@ export default function Generate() {
       createdPlaylist.id
     );
 
+    getPlaylist()
+
     return createdPlaylist;
   }
 
   async function getPlaylist() {
+    let token = window.localStorage.getItem("token");
     let playlistId = window.localStorage.getItem("playlistId");
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(token); 
@@ -90,12 +100,26 @@ export default function Generate() {
     spotifyApi
       .getPlaylist(playlistId)
       .then((data) => {
-        const playlist = data.body;
+        const playlist = data
         console.log(playlist);
+
+        const songs = playlist.tracks.items.map(item => (
+          item.track.name
+        ));
+
+        const artists = playlist.tracks.items.map(item => (
+          item.track.artists[0].name
+        ));
+
+        setPlaylistLink(playlist.external_urls.spotify)
+        setPlaylistImage(playlist.images[0].url)
+        setPlaylistSongs(songs)
+        setPlaylistArtists(artists)
       })
       .catch((error) => {
         console.error("Error fetching playlist:", error);
       });
+      setLoading(true)
   }
 
   const searchArtists = async (e) => {
@@ -179,11 +203,12 @@ export default function Generate() {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   async function generate() {
-    setLoading(true);
+    setLoadingMsg(true)
+    setLoading(false);
 
     const prompt = `
   Generate a playlist of songs based on the user’s input. 
-  The user is looking for this vibe: ${vibe}, which reflects the overall mood they want. 
+  The user is looking for this vibe: ${vibe}, which reflects the overall mood they want. If an artist's name is mentioned in this vibe, it is likely that they only want songs to that artist as it is specific to the artist.
   The user also has these preferences: ${preferences}, which includes specified genres. 
   
   You must **always include these specific songs**: ${songNames
@@ -192,7 +217,7 @@ export default function Generate() {
     
   You must include **multiple songs from each of these artists**: ${artistNames
     .map((artist) => artist.name)
-    .join(", ")}, with a minimum of 3-5 songs per artist.
+    .join(", ")}, with a minimum of 1-2 songs per artist. 
   
   To complete the playlist, please add songs from other similar artists in the same genre that fit the user’s vibe, preferences, and specified songs and artists. 
 
@@ -208,7 +233,6 @@ export default function Generate() {
 
       const text = await response.text();
 
-      setLoading(true);
       console.log(text)
 
       if (text == " " || "") {
@@ -221,9 +245,9 @@ export default function Generate() {
       }
 
       try {
-        console.log("trying")
         const parsed = JSON.parse(text);
         setGeneratedSongs(parsed.playlist);
+        setLoading(false);
         searchTracks(parsed.playlist);
       } catch (error) {
         setError(true);
@@ -232,11 +256,7 @@ export default function Generate() {
         );
       }
 
-      if (loading == false) {
-        setGenerated(true);
-      } else {
-        setGenerated(false);
-      }
+
     } catch (error) {
       console.log(generatedSongs);
       console.error("Error generating playlist:", error);
@@ -278,7 +298,7 @@ export default function Generate() {
 
   return (
     <>
-      {generated == false ? (
+      {loading == false ? (
         <div className="generateContainer">
           {error == true ? (
             <div className="error">
@@ -455,7 +475,7 @@ export default function Generate() {
                 value="Generate Now!"
               ></input>
             </form>
-            {loading == true ? (
+            {loadingMsg == true ? (
               <div className="loadingMsg">
                 <HourglassEmptyIcon fontSize="large" />
                 <p>Generating Now! This might take a minute.</p>
