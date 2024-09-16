@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Generate from "./pages/Generate";
 import Landing from "./pages/Landing";
 import GeneratedPlaylist from "./pages/GeneratedPlaylist";
+import MyPlaylists from "./pages/MyPlaylists";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/generated" element={<GeneratedPlaylist />}/>
+            <Route path="/playlists" element={<MyPlaylists />}/>
           </Routes>
         </div>
       </div>
