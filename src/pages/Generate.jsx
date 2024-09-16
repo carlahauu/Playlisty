@@ -487,7 +487,7 @@ export default function Generate() {
         </div>
       ) : (
         <>
-          <GeneratedPlaylist name={vibe} songs={generatedSongs} />
+          <GeneratedPlaylist name={vibe} href={playlistLink} songs={generatedSongs} />
         </>
       )}
     </>

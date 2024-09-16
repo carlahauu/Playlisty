@@ -13,7 +13,7 @@ export default function GeneratedPlaylist(props) {
         </p>
       </div>
       <div className="openPlaylistBtn">
-        <a href="">
+        <a href={props.href}>
           <FaSpotify className="spotifyLogo" />
           <p>Open on Spotify!</p>
         </a>
