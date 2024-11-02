@@ -1,0 +1,17 @@
+.playlistsContainer {
+  margin-left: 420px;
+  width: 60vw;
+}
+
+.playlists table tr{
+  background-color: aqua;
+}
+
+.playlists{
+  display: flex;
+  overflow-y: scroll;
+}
+
+.playlists div img{
+  width: 30%;
+}
