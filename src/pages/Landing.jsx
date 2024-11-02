@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function Landing() {
   const [token, setToken] = useState("");
-  const REDIRECT_URI = "https://playlisty.carlahau.com";
+  const REDIRECT_URI = "http://playlisty.carlahau.com";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
   const SCOPE = [
