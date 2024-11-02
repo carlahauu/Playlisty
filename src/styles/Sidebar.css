@@ -75,6 +75,8 @@
 .userData img{
   border-radius: 20px;
   margin-right: 20px;
+  width: 80px;
+  height: 80px;
 }
 
 .userName p{

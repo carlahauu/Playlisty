@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function Landing() {
   const [token, setToken] = useState("");
-  const REDIRECT_URI = "http://localhost:5173/";
+  const REDIRECT_URI = "https://playlisty.carlahau.com";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
   const SCOPE = [
@@ -15,7 +15,7 @@ export default function Landing() {
     "user-library-read",
   ].join(" ");
   const clientId = import.meta.env.VITE_SPOTIFY_ID;
-  const redirectUri = "http://localhost:5173/";
+  const redirectUri = "https://playlisty.carlahau.com";
 
   const scope = [
     "playlist-modify-public",

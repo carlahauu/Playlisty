@@ -58,12 +58,6 @@ export default function Sidebar() {
           </div>
           <p>Generate Playlist</p>
         </a>
-        <a className="sidebarGenerate" href="/playlists">
-          <div className="sparkles">
-            <QueueMusic />
-          </div>
-          <p>My Playlists</p>
-        </a>
         <a className="sidebarGenerate" href="">
           <div className="sparkles">
             <EmailIcon />
