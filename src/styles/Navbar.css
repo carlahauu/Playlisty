@@ -129,6 +129,13 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .heroImg{
+    display: none;
+    width: 0px;
+  }
+  .menuBtn:hover{
+    cursor: pointer;
+  }
   .navbarItems {
     width: 0px;
     visibility: hidden;
@@ -155,12 +162,40 @@
   .mobileNavItems li {
     margin-bottom: 6px;
   }
+  .mobileNavItems{
+    width: 12%;
+  }
   .menuBtn {
     visibility: visible;
     display: flex;
+    margin-top: -5px;
+    margin-left: 179px;
   }
   .socialIcons {
     margin-right: 0px;
+  }
+  .dashboardBtns{
+    margin-bottom: -89px;
+    margin-top: -10px;
+    margin-left: -70px;
+  }
+  .logoContainer h1{
+    display: none;
+    margin-top: 2px;
+  }
+  .logoContainer img{
+    width: 120px;
+    margin-left: 0px;
+    margin-right: 50px;
+  }
+  .navButtons div{
+    width: 230px;
+    margin-left: -115px;
+    margin-right: -35px;
+  }
+  .navbarContainer{
+    height: 75px;
+    padding-top: 10px;
   }
 }
 

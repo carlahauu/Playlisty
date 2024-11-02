@@ -75,16 +75,16 @@ function Navbar(props) {
       <div style={{ visibility: style }} className="mobileNavContainer">
         <ul className="mobileNavItems">
           <li className="home">
-            <a href="/">home</a>
+            <a href="/">Home</a>
           </li>
           <li>
-            <a href="/projects">projects</a>
+            <a href="/">Features</a>
           </li>
           <li>
-            <a href="">resume</a>
+            <a href="">About Us</a>
           </li>
           <li>
-            <a href="/about">about</a>
+            <a href="/about">Contact</a>
           </li>
         </ul>
       </div>
