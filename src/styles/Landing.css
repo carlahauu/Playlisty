@@ -65,3 +65,20 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
+@media only screen and (max-width: 600px) {
+  .heroContent{
+    margin-right: 0px;
+  }
+  .landingContent{
+    width: 75vw;
+    text-align: center;
+  }
+  .heroContainer {
+    width: 100%;
+  }
+  .heroBtn{
+    width: 70%;
+    padding-left: 110px;
+  }
+}
