@@ -15,7 +15,7 @@ export default function Landing() {
     "user-library-read",
   ].join(" ");
   const clientId = import.meta.env.VITE_SPOTIFY_ID;
-  const redirectUri = "https://playlisty.carlahau.com";
+  const redirectUri = "http://localhost:5173/";
 
   const scope = [
     "playlist-modify-public",

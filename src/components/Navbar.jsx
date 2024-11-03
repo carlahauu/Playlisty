@@ -86,6 +86,25 @@ function Navbar(props) {
           <li>
             <a href="/about">Contact</a>
           </li>
+          {!props.token ? (
+            <>
+            <li>
+              <a>Log In</a>
+            </li>
+            <li>
+            <a>Sign Up</a>
+          </li>
+          </>
+          ) : (
+            <>
+            <li onClick={props.logout}>
+              <a>Logout</a>
+            </li>
+            <li>
+              <a href="/dashboard">Dashboard</a>
+            </li>
+            </>
+          )}
         </ul>
       </div>
     </>

@@ -69,6 +69,7 @@
 @media only screen and (max-width: 600px) {
   .heroContent{
     margin-right: 0px;
+    margin-top: -25px;
   }
   .landingContent{
     width: 75vw;
@@ -78,7 +79,10 @@
     width: 100%;
   }
   .heroBtn{
-    width: 70%;
-    padding-left: 110px;
+    width: 85%;
+    padding-left: 30px;
+  }
+  .heroBtn p{
+    text-align: center;
   }
 }
