@@ -202,17 +202,25 @@
   .dashboardBtn{
     font-size: 15px;
     display: none;
+    width: 0px;
+    height: 0px;
   }
   .logInBtn{
     font-size: 15px;
     display: none;
+    width: 0px;
   }
   .signUpBtn{
     font-size: 15px;
     display: none;
+    width: 0px;
+  }
+  .mobileNavItems:hover{
+    cursor: pointer;
   }
   .menuBtn{
     width: 0px;
+    margin-left: -35px;
   }
 }
 

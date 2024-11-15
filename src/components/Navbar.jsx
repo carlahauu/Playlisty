@@ -89,10 +89,10 @@ function Navbar(props) {
           {!props.token ? (
             <>
             <li>
-              <a>Log In</a>
+              <a href={authUrl}>Log In</a>
             </li>
             <li>
-            <a>Sign Up</a>
+            <a href={authUrl}>Sign Up</a>
           </li>
           </>
           ) : (
