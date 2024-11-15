@@ -6,9 +6,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import SpotifyWebApi from "spotify-web-api-js";
 import axios from "axios";
-import { Close } from "@mui/icons-material";
+import { Close, Search } from "@mui/icons-material";
 import GeneratedPlaylist from "./GeneratedPlaylist";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Generate() {
   const [preferences, setPreferences] = useState("");
@@ -319,7 +320,8 @@ export default function Generate() {
                     type="text"
                     onChange={(e) => setSearchKey(e.target.value)}
                   />
-                  <button type={"submit"}>Search</button>
+                  <button className="searchBtn" type={"submit"}>Search</button>
+                  <button type={"submit"}><SearchIcon /></button>
                   <div
                     onClick={() => setArtistSearchBox(false)}
                     className="closeBtn"
@@ -358,7 +360,8 @@ export default function Generate() {
                     type="text"
                     onChange={(e) => setSearchKey(e.target.value)}
                   />
-                  <button type={"submit"}>Search</button>
+                  <button className="searchBtn" type={"submit"}>Search</button>
+                  <button type={"submit"}><SearchIcon /></button>
                   <div
                     onClick={() => setSongSearchBox(false)}
                     className="closeBtn"
@@ -478,7 +481,7 @@ export default function Generate() {
             </form>
             {loadingMsg == true ? (
               <div className="loadingMsg">
-                <HourglassEmptyIcon fontSize="large" />
+                <HourglassEmptyIcon className="hourGlassIcon" fontSize="large" />
                 <p>Generating Now! This might take a minute.</p>
               </div>
             ) : (

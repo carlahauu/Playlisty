@@ -336,5 +336,64 @@
 @media only screen and (max-width: 600px) {
   .generateContainer {
     margin-left: 0px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .loadingMsg{
+    margin-top: 20px;
+    background-color: #1f1f1f;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+  }
+  
+  .loadingMsg p{
+    margin-top: 5px;
+    font-size: 17px;
+    margin-left: 10px;
+  }
+  .hourGlassIcon{
+    margin-top: 6px;
+  }
+  .closeBtn{
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .artistSearchBox{
+    width: 71vw;
+  }
+  .searchBtn{
+    display: none;
+  }
+  .artistSearchBox button {
+    font-size: 20px;
+    padding: 15px;
+    padding-right: 35px;
+    border-style: none;
+    border-radius: 20px;
+    width: 15%;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .generateHeader h1{
+    font-size: 25px;
+    margin-top: 2px;
+  }
+  .generateHeader{
+    padding-right: 35px;
+  }
+  .generateForm textarea{
+    width: 92%;
+  }
+  .preferences{
+    flex-direction: column;
+  }
+  .preferences a{
+    margin-bottom: 10px;
+  }
+  .preferences p{
+    font-size: 18px;
   }
 }
